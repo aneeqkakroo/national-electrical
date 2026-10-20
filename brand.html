@@ -1,0 +1,242 @@
+<title>National Electrical Brand</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a brand sheet. Logo hero on navy, then palette, type and applications in a quiet grid. */
+:root{
+  --paper:#F4F7FB; --surface:#FFFFFF; --ink:#0E1B2C; --muted:#55667C; --line:#D6E0EC;
+  --navy:#0A2A52; --blue:#1561D6; --sky:#DCE9FB; --amber:#F2B321; --on-navy:#EAF1FB;
+  --display:"Archivo","Arial Narrow",system-ui,sans-serif;
+  --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#07111D; --surface:#0E1C2E; --ink:#E5EDF7; --muted:#94A6BE; --line:#1E324D;
+  --navy:#0B2647; --blue:#5B9BFF; --sky:#132A4B; --amber:#F5C04A; --on-navy:#EAF1FB; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#07111D; --surface:#0E1C2E; --ink:#E5EDF7; --muted:#94A6BE; --line:#1E324D;
+  --navy:#0B2647; --blue:#5B9BFF; --sky:#132A4B; --amber:#F5C04A; --on-navy:#EAF1FB; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:16px/1.6 var(--body)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-stretch:88%;line-height:1.1;text-wrap:balance;margin:0}
+h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:750}
+.eyebrow{font:600 .75rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+section{padding-block:56px;border-top:1px solid var(--line)}
+section > .wrap{display:grid;gap:28px}
+.lead{color:var(--muted);max-width:62ch;margin:0}
+
+/* hero */
+.hero{background:#0A2A52;color:#EAF1FB;padding-block:64px;border:0}
+.hero .wrap{display:grid;gap:40px;grid-template-columns:1.2fr 1fr;align-items:center}
+.hero p{color:#B9CBE3;max-width:52ch;margin:0}
+.hero .eyebrow{color:#F2B321}
+.hero h1{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:800;margin-block:12px 16px}
+.logo-stage{background:#FFFFFF;border-radius:6px;padding:40px 28px;display:grid;place-items:center}
+@media (max-width:820px){.hero .wrap{grid-template-columns:1fr}}
+
+/* logo variants */
+.variants{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.variant{border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--surface)}
+.variant .art{height:170px;display:grid;place-items:center;padding:20px}
+.variant .cap{padding:12px 16px;border-top:1px solid var(--line);font-size:.9rem}
+.variant .cap b{display:block;font-weight:600}
+.variant .cap span{color:var(--muted);font-size:.85rem}
+.bg-white{background:#FFFFFF}.bg-navy{background:#0A2A52}.bg-blue{background:#1561D6}.bg-amber{background:#F2B321}
+
+/* palette */
+.palette{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px}
+.swatch{border-radius:6px;overflow:hidden;border:1px solid var(--line);background:var(--surface)}
+.swatch .chip{height:110px}
+.swatch .meta{padding:12px 14px;display:grid;gap:2px}
+.swatch .meta b{font-weight:600}
+.swatch code{font:400 .8rem var(--mono);color:var(--muted)}
+.swatch .use{font-size:.85rem;color:var(--muted)}
+.ratio{display:flex;height:18px;border-radius:3px;overflow:hidden;max-width:560px}
+.ratio div{height:100%}
+
+/* type */
+.type{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.spec{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:24px;display:grid;gap:10px;min-width:0}
+.spec .big{font-size:3rem;line-height:1}
+.spec small{color:var(--muted);font:400 .8rem var(--mono)}
+
+/* applications */
+.apps{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+@media (max-width:820px){.apps{grid-template-columns:1fr}}
+.card-biz{aspect-ratio:85/55;max-width:100%;border-radius:8px;background:#0A2A52;color:#EAF1FB;padding:24px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 12px 30px rgba(10,42,82,.25)}
+.card-biz .who b{font:700 1.1rem var(--display);font-stretch:90%;display:block}
+.card-biz .who span{color:#B9CBE3;font-size:.85rem}
+.card-biz .contact{font:400 .78rem/1.7 var(--mono);color:#EAF1FB}
+.card-biz .bar{height:4px;background:#F2B321;width:56px;border-radius:2px}
+.van{width:100%;height:auto;display:block}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.rule{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:18px 20px}
+.rule h3{font-size:1.05rem;font-weight:700;margin-bottom:6px}
+.rule p{margin:0;color:var(--muted);font-size:.93rem}
+.rule.do h3{color:var(--blue)}
+footer{padding-block:32px;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line)}
+</style>
+
+<!-- Reusable SVG symbols -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- Mark: an N drawn as a circuit — two conductors (verticals) joined by a live link (amber diagonal), with terminals at each end -->
+    <symbol id="mark" viewBox="0 0 64 64">
+      <rect width="64" height="64" rx="12" fill="#0A2A52"/>
+      <path d="M19 47V17" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" fill="none"/>
+      <path d="M45 47V17" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" fill="none"/>
+      <path d="M19 17L29 31L35 31L45 47" stroke="#F2B321" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="19" cy="47" r="4.5" fill="#F2B321"/>
+      <circle cx="45" cy="17" r="4.5" fill="#F2B321"/>
+    </symbol>
+    <symbol id="mark-rev" viewBox="0 0 64 64">
+      <rect width="64" height="64" rx="12" fill="#FFFFFF"/>
+      <path d="M19 47V17M45 47V17" stroke="#0A2A52" stroke-width="6" stroke-linecap="round" fill="none"/>
+      <path d="M19 17L29 31L35 31L45 47" stroke="#1561D6" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="19" cy="47" r="4.5" fill="#1561D6"/><circle cx="45" cy="17" r="4.5" fill="#1561D6"/>
+    </symbol>
+    <symbol id="mark-mono" viewBox="0 0 64 64">
+      <rect x="3" y="3" width="58" height="58" rx="10" fill="none" stroke="#0A2A52" stroke-width="4"/>
+      <path d="M19 47V17M45 47V17M19 17L29 31L35 31L45 47" stroke="#0A2A52" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Brand identity · v1</div>
+      <h1>National Electrical Ltd</h1>
+      <p>The mark is the letter N drawn as a circuit: two conductors joined by a live link, with a terminal at each end. Navy and electric blue carry the brand. Amber, the colour of electrical warning signs, is used sparingly to mark what's live.</p>
+    </div>
+    <div class="logo-stage">
+      <svg viewBox="0 0 440 96" width="100%" style="max-width:420px" role="img" aria-label="National Electrical Ltd logo">
+        <use href="#mark" x="0" y="8" width="80" height="80"/>
+        <text x="100" y="50" font-family="Archivo, Arial Narrow, sans-serif" font-weight="800" font-size="38" font-stretch="85%" fill="#0A2A52" letter-spacing="1">NATIONAL</text>
+        <text x="100" y="82" font-family="Archivo, Arial Narrow, sans-serif" font-weight="600" font-size="22" font-stretch="100%" fill="#1561D6" letter-spacing="6.2">ELECTRICAL LTD</text>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div><div class="eyebrow">01 · Logo</div><h2>Logo versions</h2></div>
+    <p class="lead">Use the primary logo wherever you can. Use the reversed version on navy or photos, the icon on its own where space is tight (social profiles, app icons, a favicon), and the one-colour version for engraving, embroidery and stamps.</p>
+    <div class="variants">
+      <div class="variant">
+        <div class="art bg-white">
+          <svg viewBox="0 0 440 96" width="100%" role="img" aria-label="Primary logo"><use href="#mark" x="0" y="8" width="80" height="80"/><text x="100" y="50" font-family="Archivo, Arial Narrow, sans-serif" font-weight="800" font-size="38" font-stretch="85%" fill="#0A2A52" letter-spacing="1">NATIONAL</text><text x="100" y="82" font-family="Archivo, Arial Narrow, sans-serif" font-weight="600" font-size="22" fill="#1561D6" letter-spacing="6.2">ELECTRICAL LTD</text></svg>
+        </div>
+        <div class="cap"><b>Primary</b><span>Website, letterheads, certificates</span></div>
+      </div>
+      <div class="variant">
+        <div class="art bg-navy">
+          <svg viewBox="0 0 440 96" width="100%" role="img" aria-label="Reversed logo"><use href="#mark-rev" x="0" y="8" width="80" height="80"/><text x="100" y="50" font-family="Archivo, Arial Narrow, sans-serif" font-weight="800" font-size="38" font-stretch="85%" fill="#FFFFFF" letter-spacing="1">NATIONAL</text><text x="100" y="82" font-family="Archivo, Arial Narrow, sans-serif" font-weight="600" font-size="22" fill="#F2B321" letter-spacing="6.2">ELECTRICAL LTD</text></svg>
+        </div>
+        <div class="cap"><b>Reversed</b><span>Vans, workwear, dark backgrounds</span></div>
+      </div>
+      <div class="variant">
+        <div class="art bg-white" style="gap:18px;display:flex;justify-content:center;align-items:center">
+          <svg width="96" height="96" role="img" aria-label="Icon"><use href="#mark"/></svg>
+          <svg width="48" height="48" aria-hidden="true"><use href="#mark"/></svg>
+          <svg width="24" height="24" aria-hidden="true"><use href="#mark"/></svg>
+        </div>
+        <div class="cap"><b>Icon</b><span>Social media, favicon, stickers. Stays legible down to 16px</span></div>
+      </div>
+      <div class="variant">
+        <div class="art bg-white">
+          <svg viewBox="0 0 440 96" width="100%" role="img" aria-label="One-colour logo"><use href="#mark-mono" x="0" y="8" width="80" height="80"/><text x="100" y="50" font-family="Archivo, Arial Narrow, sans-serif" font-weight="800" font-size="38" font-stretch="85%" fill="#0A2A52" letter-spacing="1">NATIONAL</text><text x="100" y="82" font-family="Archivo, Arial Narrow, sans-serif" font-weight="600" font-size="22" fill="#0A2A52" letter-spacing="6.2">ELECTRICAL LTD</text></svg>
+        </div>
+        <div class="cap"><b>One colour</b><span>Embroidery, engraving, rubber stamps</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div><div class="eyebrow">02 · Colour</div><h2>Colour palette</h2></div>
+    <p class="lead">Mostly navy and white, with electric blue for buttons and links. Amber appears in small amounts only: the logo's live link, a highlight bar, an emergency call-out badge.</p>
+    <div class="palette">
+      <div class="swatch"><div class="chip" style="background:#0A2A52"></div><div class="meta"><b>Conduit Navy</b><code>#0A2A52 · RGB 10 42 82</code><span class="use">Primary. Headers, vans, workwear</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#1561D6"></div><div class="meta"><b>Electric Blue</b><code>#1561D6 · RGB 21 97 214</code><span class="use">Buttons, links, highlights</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#DCE9FB"></div><div class="meta"><b>Pale Sky</b><code>#DCE9FB · RGB 220 233 251</code><span class="use">Background panels</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#F2B321"></div><div class="meta"><b>Live Amber</b><code>#F2B321 · RGB 242 179 33</code><span class="use">Accent only, about 5%</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#0E1B2C"></div><div class="meta"><b>Ink</b><code>#0E1B2C · RGB 14 27 44</code><span class="use">Body text</span></div></div>
+    </div>
+    <div>
+      <div class="ratio" aria-label="Colour proportions">
+        <div style="width:45%;background:#FFFFFF;border:1px solid var(--line)"></div>
+        <div style="width:30%;background:#0A2A52"></div>
+        <div style="width:12%;background:#1561D6"></div>
+        <div style="width:8%;background:#DCE9FB"></div>
+        <div style="width:5%;background:#F2B321"></div>
+      </div>
+      <p class="lead" style="font-size:.85rem;margin-top:8px">Rough proportions: white 45%, navy 30%, blue 12%, sky 8%, amber 5%.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div><div class="eyebrow">03 · Typography</div><h2>Typefaces</h2></div>
+    <p class="lead">All three are free Google Fonts, so they work on the website, in Canva and in Word.</p>
+    <div class="type">
+      <div class="spec">
+        <small>Headings: Archivo, semi-condensed, bold</small>
+        <div class="big" style="font-family:var(--display);font-stretch:88%;font-weight:800">Aa Bb 123</div>
+        <div style="font-family:var(--display);font-stretch:88%;font-weight:700;font-size:1.3rem">Safe, certified electrical work</div>
+      </div>
+      <div class="spec">
+        <small>Body text: Public Sans</small>
+        <div class="big" style="font-family:var(--body);font-weight:500">Aa Bb 123</div>
+        <div>Clear, plain text for descriptions, quotes and emails. The UK government's own typeface family uses the same plain style.</div>
+      </div>
+      <div class="spec">
+        <small>Data and certificates: JetBrains Mono</small>
+        <div class="big" style="font-family:var(--mono);font-size:2.4rem">Zs 0.42Ω</div>
+        <div style="font-family:var(--mono);font-size:.9rem;color:var(--muted)">BS 7671 · RCD 18 ms · IR BS 7671:2018+A2:2022 · RCD 18 msgt;999 MΩ</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div><div class="eyebrow">04 · Applications</div><h2>How it looks in use</h2></div>
+    <div class="apps">
+      <div class="card-biz" aria-label="Business card mock-up">
+        <svg viewBox="0 0 440 96" width="220" role="img" aria-label="Logo"><use href="#mark-rev" x="0" y="8" width="80" height="80"/><text x="100" y="50" font-family="Archivo, Arial Narrow, sans-serif" font-weight="800" font-size="38" font-stretch="85%" fill="#FFFFFF" letter-spacing="1">NATIONAL</text><text x="100" y="82" font-family="Archivo, Arial Narrow, sans-serif" font-weight="600" font-size="22" fill="#F2B321" letter-spacing="6.2">ELECTRICAL LTD</text></svg>
+        <div style="display:grid;gap:10px">
+          <div class="bar"></div>
+          <div class="who"><b>Your Name</b><span>Director · Approved Electrician</span></div>
+          <div class="contact">07344 988182<br>info@nationalelectrical.uk<br>Cambridgeshire &amp; East of England</div>
+        </div>
+      </div>
+      <svg class="van" viewBox="0 0 520 260" role="img" aria-label="Van livery mock-up">
+        <rect x="0" y="0" width="520" height="260" style="fill:var(--sky)" rx="8"/>
+        <path d="M40 190V92q0-14 14-14h270l70 50h56q20 0 20 20v42z" fill="#FFFFFF" stroke="#C9D6E6" stroke-width="2"/>
+        <path d="M324 78l70 50h-70z" fill="#B9D2F2"/>
+        <rect x="40" y="160" width="430" height="30" fill="#0A2A52"/>
+        <rect x="40" y="154" width="430" height="6" fill="#F2B321"/>
+        <use href="#mark" x="64" y="96" width="44" height="44"/>
+        <text x="120" y="118" font-family="Archivo, Arial Narrow, sans-serif" font-weight="800" font-size="24" font-stretch="85%" fill="#0A2A52">NATIONAL</text>
+        <text x="120" y="138" font-family="Archivo, Arial Narrow, sans-serif" font-weight="600" font-size="13" fill="#1561D6" letter-spacing="3.6">ELECTRICAL LTD</text>
+        <text x="64" y="180" font-family="JetBrains Mono, monospace" font-size="13" fill="#FFFFFF">Install · Design · Test   07344 988182</text>
+        <circle cx="120" cy="196" r="24" fill="#1B2A3D"/><circle cx="120" cy="196" r="10" fill="#C9D6E6"/>
+        <circle cx="410" cy="196" r="24" fill="#1B2A3D"/><circle cx="410" cy="196" r="10" fill="#C9D6E6"/>
+      </svg>
+    </div>
+    <div class="rules">
+      <div class="rule do"><h3>Do</h3><p>Leave clear space around the logo equal to half the height of the icon. Put the logo on white, navy or a calm photo.</p></div>
+      <div class="rule do"><h3>Do</h3><p>Keep amber for small marks that need attention, like the emergency call-out badge.</p></div>
+      <div class="rule"><h3>Don't</h3><p>Stretch, rotate or recolour the mark, add lightning bolts or glows, or put the logo on a busy background.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">National Electrical Ltd brand guidelines. Domain: nationalelectrical.uk</div></footer>

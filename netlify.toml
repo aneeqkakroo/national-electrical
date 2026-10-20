@@ -1,0 +1,3 @@
+# Netlify serves the pre-built site/ folder. Run `python src/build.py` and commit after editing content.
+[build]
+  publish = "site"
