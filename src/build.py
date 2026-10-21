@@ -58,6 +58,12 @@ def head(title, desc, path, r, jsonld=None, artifact=False):
             f'<link rel="canonical" href="{canon}">'
             f'<meta property="og:type" content="website"><meta property="og:title" content="{e(title)}">'
             f'<meta property="og:description" content="{e(desc)}"><meta property="og:url" content="{canon}">'
+            f'<meta property="og:site_name" content="{e(B["name"])}"><meta property="og:locale" content="en_GB">'
+            f'<meta property="og:image" content="{B["url"]}/assets/og-image.jpg"><meta property="og:image:secure_url" content="{B["url"]}/assets/og-image.jpg">'
+            f'<meta property="og:image:type" content="image/jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">'
+            f'<meta property="og:image:alt" content="National Electrical Ltd branded van with phone number {B["phone"]}">'
+            f'<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="{B["url"]}/assets/og-image.jpg">'
+            f'<link rel="apple-touch-icon" href="{r}assets/apple-touch-icon.png">'
             f'<meta name="theme-color" content="#0A2A52">'
             f'<link rel="icon" href="{r}assets/favicon.svg" type="image/svg+xml">'
             f'{FONTS}<link rel="stylesheet" href="{r}assets/site.css">')
