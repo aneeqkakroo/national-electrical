@@ -6,6 +6,7 @@ Edit content.py for words, assets/site.css for styling. Every page is plain stat
 so ../site/ can be uploaded to any host (Netlify, Cloudflare Pages, cPanel...).
 """
 import json, shutil
+from urllib.parse import quote
 from datetime import date
 from html import escape as e
 from pathlib import Path
@@ -43,6 +44,18 @@ LOGO = ('<svg viewBox="0 0 440 96" role="img" aria-label="National Electrical Lt
 
 TICK = '<svg width="16" height="16" aria-hidden="true"><use href="#tick"/></svg>'
 PHONE = f'<a href="tel:{B["phone_tel"]}">{B["phone"]}</a>'
+WA_ICON = ('<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">'
+           '<path d="M3.6 20.4l1.2-4A8.6 8.6 0 1 1 8 19.3z"/>'
+           '<path d="M9.2 7.8c-.4 3 2.8 6.9 6.6 7.2l1-1.5-2-1.1-1 .8c-1.1-.5-2.3-1.7-2.8-2.8l.8-1-1-2z" fill="currentColor" stroke="none"/></svg>')
+def lc(name):
+    """Lower-case a service name for use mid-sentence, keeping acronyms like EICR, PAT, EV, CCTV."""
+    return " ".join(w if w.isupper() else w.lower() for w in name.split())
+
+def wa(text="Hi National Electrical, I'd like a quote please."):
+    return f"https://wa.me/{B['whatsapp']}?text={quote(text)}"
+def wa_btn(text=None, label="WhatsApp us", cls="btn btn-wa"):
+    href = wa(text) if text else wa()
+    return f'<a href="{href}" class="{cls}" target="_blank" rel="noopener">{WA_ICON}<span>{label}</span></a>'
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
          '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">')
 
@@ -85,7 +98,7 @@ def header(r, active=""):
     draft = f'<div class="draft"><div class="wrap"><b>Draft.</b> {e(DRAFT_NOTE.replace("Draft website. ", ""))}</div></div>' if DRAFT_NOTE else ""
     return f'''<a class="skip" href="#main">Skip to content</a>{SPRITE}{draft}
 <div class="topbar"><div class="wrap"><span>Covering <b>{e(B["region_line"])}</b></span>
-<span class="em"><span class="dot"></span> Call us: {PHONE}</span></div></div>
+<span class="em"><span class="dot"></span> Call us: {PHONE} <span aria-hidden="true">·</span> <a href="{wa()}" target="_blank" rel="noopener">WhatsApp</a></span></div></div>
 <header class="site-head"><div class="wrap">
 <a class="brand" href="{home_url(r)}" aria-label="National Electrical Ltd home">{LOGO}</a>
 <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">Menu</button>
@@ -110,11 +123,12 @@ def footer(r):
 <div><h4>Services</h4><ul>{svc}<li><a href="{r}services/index.html">All services</a></li></ul></div>
 <div><h4>Who we help</h4><ul>{secs}</ul></div>
 <div><h4>Areas</h4><ul>{areas}</ul></div>
-<div><h4>Contact</h4><ul><li>{PHONE}</li><li><a href="mailto:{B["email"]}">{B["email"]}</a></li><li>{e(B["hours"])}</li><li><a href="{r}contact.html">Get a free quote</a></li></ul></div>
+<div><h4>Contact</h4><ul><li>{PHONE}</li><li><a href="{wa()}" target="_blank" rel="noopener">WhatsApp us</a></li><li><a href="mailto:{B["email"]}">{B["email"]}</a></li><li>{e(B["hours"])}</li><li><a href="{r}contact.html">Get a free quote</a></li></ul></div>
 </div>
 <div class="legal"><span>© {date.today().year} {e(B["name"])}. Registered in England &amp; Wales{f", company no. {e(B['company_no'])}" if B["company_no"] else ""}{f". Registered office: {e(B['registered_office'])}" if B["registered_office"] else ""}.</span>
 <span><a href="{r}privacy.html">Privacy policy</a> · <a href="{r}faq.html">FAQs</a></span></div></div></footer>
-<div class="callbar"><a class="btn btn-amber" href="tel:{B["phone_tel"]}">Call {B["phone"]}</a><a class="btn btn-primary" href="{r}contact.html">Free quote</a></div>
+<div class="callbar"><a class="btn btn-amber" href="tel:{B["phone_tel"]}">Call</a>{wa_btn(label="WhatsApp")}<a class="btn btn-primary" href="{r}contact.html">Quote</a></div>
+<a class="wa-float" href="{wa()}" target="_blank" rel="noopener" aria-label="Message us on WhatsApp">{WA_ICON}<span>WhatsApp us</span></a>
 <script src="{r}assets/site.js"></script>'''
 
 def page(path, title, desc, body, active="", jsonld=None, artifact=False):
@@ -138,21 +152,21 @@ def crumbs(r, items):
         parts.append(f'<a href="{href}">{e(label)}</a>' if href else f'<span>{e(label)}</span>')
     return f'<nav class="crumbs" aria-label="Breadcrumb">{"".join(parts)}</nav>'
 
-def page_hero(r, eyebrow, h1, lead, crumb_items, ctas=True, quote_hash=""):
+def page_hero(r, eyebrow, h1, lead, crumb_items, ctas=True, quote_hash="", wa_text=None):
     c = (f'<div class="ctas"><a href="{r}contact.html{quote_hash}" class="btn btn-amber">Get a free quote</a>'
-         f'<a href="tel:{B["phone_tel"]}" class="btn btn-ghost">Call {B["phone"]}</a></div>') if ctas else ""
+         f'{wa_btn(wa_text)}<a href="tel:{B["phone_tel"]}" class="btn btn-ghost">Call {B["phone"]}</a></div>') if ctas else ""
     return f'''<section class="page-hero"><div class="wrap">{crumbs(r, crumb_items)}
 <div class="eyebrow">{e(eyebrow)}</div><h1>{h1}</h1><p class="lead">{lead}</p>{c}</div></section>'''
 
 def cta_band(r, title="Need an electrician?", text=None):
     text = text or f"Free, fixed-price quotes across {B['region_line']}."
     return f'''<section class="cta-band"><div class="wrap"><div><h2>{e(title)}</h2><p>{e(text)}</p></div>
-<div class="ctas" style="margin:0"><a href="{r}contact.html" class="btn btn-amber">Get a free quote</a><a href="tel:{B["phone_tel"]}" class="btn btn-ghost">Call {B["phone"]}</a></div></div></section>'''
+<div class="ctas" style="margin:0"><a href="{r}contact.html" class="btn btn-amber">Get a free quote</a>{wa_btn()}<a href="tel:{B["phone_tel"]}" class="btn btn-ghost">Call {B["phone"]}</a></div></div></section>'''
 
-def quote_card(r, hash_=""):
+def quote_card(r, hash_="", wa_text=None):
     return f'''<div class="quote-card"><h3>Get a free quote</h3><p>Tell us about the job and we'll reply within one working day.</p>
 <div class="phone"><small>Call us</small>{PHONE}</div>
-<a href="{r}contact.html{hash_}" class="btn btn-amber">Request a quote</a></div>'''
+<a href="{r}contact.html{hash_}" class="btn btn-amber">Request a quote</a>{wa_btn(wa_text, "Message us on WhatsApp")}</div>'''
 
 def side_list(title, links):
     lis = "".join(f'<li><a href="{h}">{e(t)}</a></li>' for t, h in links)
@@ -223,6 +237,7 @@ def contact_section(r, heading="Tell us about your job"):
 <div class="eyebrow">Get a free quote</div><h2 style="margin-top:12px">{e(heading)}</h2>
 <p class="lead" style="margin-top:12px">We reply to every enquiry within one working day. For emergencies, please call.</p>
 <div class="direct"><div><small>Phone</small>{PHONE}</div>
+<div><small>WhatsApp</small><a href="{wa()}" target="_blank" rel="noopener">Message us on WhatsApp</a></div>
 <div><small>Email</small><a href="mailto:{B["email"]}">{B["email"]}</a></div>
 <div><small>Hours</small><b style="font-size:1.05rem">{e(B["hours"])}</b></div></div></div>
 {quote_form(r)}</div></section>'''
@@ -274,7 +289,7 @@ def home_body(r):
 <div class="eyebrow">Installation · Design · Testing</div>
 <h1>Safe, certified electrical work across <em>London &amp; the East of England</em></h1>
 <p class="lead">Qualified electricians for homes, landlords and businesses across Cambridgeshire, the East of England and Greater London. We install, design and test to BS 7671 and give you the right certificate for every job.</p>
-<div class="ctas"><a href="{r}contact.html" class="btn btn-amber">Get a free quote</a><a href="tel:{B["phone_tel"]}" class="btn btn-ghost">Call {B["phone"]}</a></div>
+<div class="ctas"><a href="{r}contact.html" class="btn btn-amber">Get a free quote</a>{wa_btn()}<a href="tel:{B["phone_tel"]}" class="btn btn-ghost">Call {B["phone"]}</a></div>
 <ul class="hero-points"><li>{TICK}Free, fixed-price quotes</li><li>{TICK}Certificate with every job</li><li>{TICK}Domestic, commercial &amp; industrial</li><li>{TICK}Fully insured</li></ul></div>
 <figure class="cert" aria-label="Example electrical installation condition report">
 <div class="cert-top"><b>Electrical Installation Condition Report</b><span>Example</span></div>
@@ -311,12 +326,12 @@ def service_body(s):
         callout = f'<div class="callout"><b>{e(s["callout"][0])}</b><span>{e(s["callout"][1])}</span></div>' if s.get("callout") else ""
         rel = [(SVC[x]["name"], svc_url(r, x)) for x in s["related"]]
         areas = [(a["name"], area_url(r, a["slug"])) for a in AREAS]
-        return (page_hero(r, g, s["h1"], e(s["intro"]), [("Services", f"{r}services/index.html"), (s["name"], None)], quote_hash="#" + s["slug"]) +
+        return (page_hero(r, g, s["h1"], e(s["intro"]), [("Services", f"{r}services/index.html"), (s["name"], None)], quote_hash="#" + s["slug"], wa_text=f"Hi National Electrical, I'd like a quote for {lc(s['name'])}.") +
                 f'''<section class="band"><div class="wrap layout"><div class="prose">
 <section><h2>What's included</h2>{checklist(s["includes"])}</section>{callout}{secs}{codes}{faq_block(s["faqs"])}
 <section><h2>Related services</h2>{service_cards(r, s["related"])}</section></div>
-<aside class="aside">{quote_card(r, "#" + s["slug"])}{side_list("Areas we cover", areas)}</aside></div></section>''' +
-                cta_band(r, f"Need {s['name'].lower()}?"))
+<aside class="aside">{quote_card(r, "#" + s["slug"], f"Hi National Electrical, I'd like a quote for {lc(s['name'])}.")}{side_list("Areas we cover", areas)}</aside></div></section>''' +
+                cta_band(r, f"Need {lc(s['name'])}?"))
     return body
 
 def services_index(r):
@@ -356,13 +371,13 @@ def area_body(a):
         groups = "".join(f'<div class="town-group"><h3>{e(g)}</h3><ul>' + "".join(f"<li>{e(t)}</li>" for t in ts) + "</ul></div>" for g, ts in a["towns"].items())
         pcs = "".join(f"<span>{p}</span>" for p in a["postcodes"])
         others = [(x["name"], area_url(r, x["slug"])) for x in AREAS if x["slug"] != a["slug"]]
-        return (page_hero(r, "Areas we cover", f'Electricians in <em>{e(a["name"])}</em>', e(a["intro"]), [("Areas", f"{r}areas/index.html"), (a["name"], None)]) +
+        return (page_hero(r, "Areas we cover", f'Electricians in <em>{e(a["name"])}</em>', e(a["intro"]), [("Areas", f"{r}areas/index.html"), (a["name"], None)], wa_text=f"Hi National Electrical, I need an electrician in {a['name']}.") +
                 f'''<section class="band"><div class="wrap layout"><div class="prose">
 <section><h2>Where we work in {e(a["name"])}</h2><div class="town-groups">{groups}</div><div class="pc" style="margin-top:4px">{pcs}</div></section>
 <section><h2>Local work</h2><p>{e(a["local"])}</p></section>
 <section><h2>Popular services in {e(a["name"])}</h2>{service_cards(r, a["services"])}</section>
 <section><h2>Every job tested and certified</h2>{checklist(["Free, fixed-price quotes", "Qualified to BS 7671", "Part P notification handled", "Certificate with every job", "Domestic, commercial & industrial", "Fully insured"])}</section>
-</div><aside class="aside">{quote_card(r)}{side_list("Other areas", others)}</aside></div></section>''' + cta_band(r, f"Need an electrician in {a['name']}?"))
+</div><aside class="aside">{quote_card(r, "", f"Hi National Electrical, I need an electrician in {a['name']}.")}{side_list("Other areas", others)}</aside></div></section>''' + cta_band(r, f"Need an electrician in {a['name']}?"))
     return body
 
 def about_body(r):
@@ -434,7 +449,7 @@ def main():
         write(f"services/{s['slug']}.html", f"{s['name']} | {B['name']}", s["meta"], service_body(s), "services")
     write("customers/index.html", f"Who we help | {B['name']}", "Electrical services for homeowners, landlords, businesses and industrial customers.", customers_index, "customers")
     for s in SECTORS:
-        write(f"customers/{s['slug']}.html", f"Electricians for {s['name'].lower()} | {B['name']}", s["meta"], sector_body(s), "customers")
+        write(f"customers/{s['slug']}.html", f"Electricians for {lc(s['name'])} | {B['name']}", s["meta"], sector_body(s), "customers")
     write("areas/index.html", f"Areas we cover | {B['name']}", f"Electricians covering {B['region_line']}.", areas_index, "areas")
     for a in AREAS:
         write(f"areas/{a['slug']}.html", f"Electricians in {a['name']} | {B['name']}", a["meta"], area_body(a), "areas")

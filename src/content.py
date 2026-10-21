@@ -6,6 +6,7 @@ BUSINESS = {
     "url": "https://nationalelectrical.uk",
     "phone": "07344 988182",
     "phone_tel": "+447344988182",
+    "whatsapp": "447344988182",  # WhatsApp number in international format, no + or spaces
     "email": "info@nationalelectrical.uk",
     "hours": "Mon–Fri 8am–6pm · Sat 9am–1pm",
     "hours_schema": ["Mo-Fr 08:00-18:00", "Sa 09:00-13:00"],
