@@ -98,7 +98,7 @@ def header(r, active=""):
     draft = f'<div class="draft"><div class="wrap"><b>Draft.</b> {e(DRAFT_NOTE.replace("Draft website. ", ""))}</div></div>' if DRAFT_NOTE else ""
     return f'''<a class="skip" href="#main">Skip to content</a>{SPRITE}{draft}
 <div class="topbar"><div class="wrap"><span>Covering <b>{e(B["region_line"])}</b></span>
-<span class="em"><span class="dot"></span> Call us: {PHONE} <span aria-hidden="true">·</span> <a href="{wa()}" target="_blank" rel="noopener">WhatsApp</a></span></div></div>
+<span class="em"><span class="dot"></span> Call us: {PHONE} <span aria-hidden="true">·</span> <a class="wa-link" href="{wa()}" target="_blank" rel="noopener">{WA_ICON}WhatsApp</a></span></div></div>
 <header class="site-head"><div class="wrap">
 <a class="brand" href="{home_url(r)}" aria-label="National Electrical Ltd home">{LOGO}</a>
 <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">Menu</button>
@@ -108,7 +108,7 @@ def header(r, active=""):
 <a href="{r}areas/index.html"{cur("areas")}>Areas</a>
 <a href="{r}about.html"{cur("about")}>About</a>
 <a href="{r}faq.html"{cur("faq")}>FAQs</a>
-<a href="{r}contact.html" class="btn btn-primary">Get a free quote</a>
+{wa_btn(label="WhatsApp", cls="btn btn-wa nav-wa")}<a href="{r}contact.html" class="btn btn-primary">Get a free quote</a>
 </nav></div></header>
 <main id="main">'''
 
@@ -123,7 +123,7 @@ def footer(r):
 <div><h4>Services</h4><ul>{svc}<li><a href="{r}services/index.html">All services</a></li></ul></div>
 <div><h4>Who we help</h4><ul>{secs}</ul></div>
 <div><h4>Areas</h4><ul>{areas}</ul></div>
-<div><h4>Contact</h4><ul><li>{PHONE}</li><li><a href="{wa()}" target="_blank" rel="noopener">WhatsApp us</a></li><li><a href="mailto:{B["email"]}">{B["email"]}</a></li><li>{e(B["hours"])}</li><li><a href="{r}contact.html">Get a free quote</a></li></ul></div>
+<div><h4>Contact</h4><ul><li>{PHONE}</li><li><a class="wa-link" href="{wa()}" target="_blank" rel="noopener">{WA_ICON}WhatsApp us</a></li><li><a href="mailto:{B["email"]}">{B["email"]}</a></li><li>{e(B["hours"])}</li><li><a href="{r}contact.html">Get a free quote</a></li></ul></div>
 </div>
 <div class="legal"><span>© {date.today().year} {e(B["name"])}. Registered in England &amp; Wales{f", company no. {e(B['company_no'])}" if B["company_no"] else ""}{f". Registered office: {e(B['registered_office'])}" if B["registered_office"] else ""}.</span>
 <span><a href="{r}privacy.html">Privacy policy</a> · <a href="{r}faq.html">FAQs</a></span></div></div></footer>
@@ -237,7 +237,7 @@ def contact_section(r, heading="Tell us about your job"):
 <div class="eyebrow">Get a free quote</div><h2 style="margin-top:12px">{e(heading)}</h2>
 <p class="lead" style="margin-top:12px">We reply to every enquiry within one working day. For emergencies, please call.</p>
 <div class="direct"><div><small>Phone</small>{PHONE}</div>
-<div><small>WhatsApp</small><a href="{wa()}" target="_blank" rel="noopener">Message us on WhatsApp</a></div>
+<div><small>WhatsApp</small><a class="wa-link" href="{wa()}" target="_blank" rel="noopener">{WA_ICON}Message us on WhatsApp</a></div>
 <div><small>Email</small><a href="mailto:{B["email"]}">{B["email"]}</a></div>
 <div><small>Hours</small><b style="font-size:1.05rem">{e(B["hours"])}</b></div></div></div>
 {quote_form(r)}</div></section>'''
